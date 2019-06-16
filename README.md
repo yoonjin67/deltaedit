@@ -5,7 +5,7 @@
 * DeltaEdit is Text Editor for Unix-like OS.
 ### How do I get set up? ###
 *Dependency
-pygobject
+pygobject(python3-gi)
 webkitgtk(gir1.2-webkit-3.0)
 python3-pip
 * Setup
@@ -21,7 +21,6 @@ I need your help!
 
 ### Who do I talk to? ###
 * yoonjin671@protonmail.ch
-Age:17/Has little time to fix bugs. Doing my best!
+Age:18/Has little time to fix bugs. Doing my best!
 ### Windows Support ###
-There is no Python3 Gtk+ 3 support for Windows.
-I can't compile it for Windows yet.
+There is no latest Python3 Gtk+ 3 support for Windows.
