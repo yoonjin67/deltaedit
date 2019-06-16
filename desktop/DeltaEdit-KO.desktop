@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=2.4.7
+Type=Application
+Name=DeltaEdit-KOREAN 
+GenericName=Text Editor for KOREAN
+Comment=Text Editor
+Categories=GNOME;GTK;Utility;TextEditor;
+Icon=dedit
+Exec=dedit-ko
+TryExec=/usr/bin/dedit-ko
+Terminal=false
+MimeType=text/plain;
+X-GNOME-FullName=KS/Delta Text Editor-Korean

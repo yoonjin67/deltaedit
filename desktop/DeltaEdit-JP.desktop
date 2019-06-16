@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=2.4.7
+Type=Application
+Name=DeltaEdit-JAPANESE
+GenericName=Text Editor for JAPANESE
+Comment=Text Editor
+Categories=GNOME;GTK;Utility;TextEditor;
+Icon=dedit
+Exec=dedit-jp
+TryExec=/usr/bin/dedit-jp
+Terminal=false
+MimeType=text/plain;
+X-GNOME-FullName=KS/Delta Text Editor-Japanese

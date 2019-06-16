@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=2.4.7
+Type=Application
+Name=DeltaEdit-CHINESE 
+GenericName=Text Editor for CHINESE
+Comment=Text Editor
+Categories=GNOME;GTK;Utility;TextEditor;
+Icon=dedit
+Exec=dedit-cn
+TryExec=/usr/bin/dedit-cn
+Terminal=false
+MimeType=text/plain;
+X-GNOME-FullName=KS/Delta Text Editor-Chinese
