@@ -2,7 +2,7 @@
 
 ### What is this repository for? ###
 
-* DeltaTools are 'portable tools set' for Unix-like OS.
+* DeltaEdit is Text Editor for Unix-like OS.
 ### How do I get set up? ###
 *Dependency
 pygobject
