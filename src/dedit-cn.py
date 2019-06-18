@@ -6,7 +6,7 @@ import sys
 gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit', '3.0')
 gi.require_version('GtkSource', '3.0')
-from gi.repository import Gtk, GtkSource, WebKit, Gio
+from gi.repository import Gtk, GtkSource, WebKit
 from urllib.request import urlopen
 ##창을 생성하고, 버튼 클릭 시 실행될 함수들을 명시합니다.##
 print("           Keisung/Bit_Time   ")

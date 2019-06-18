@@ -2,7 +2,7 @@
 import gi
 import sys
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk,Gio
+from gi.repository import Gtk
 class AppWindow(Gtk.ApplicationWindow):
 	def __init__(self,*args,**kwargs):
 		super().__init__(*args,**kwargs)
