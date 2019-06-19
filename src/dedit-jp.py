@@ -5,7 +5,7 @@ from subprocess import Popen
 import sys
 gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit', '3.0')
-gi.require_version('GtkSource', '3.0')
+gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource, WebKit
 from urllib.request import urlopen
 ##창을 생성하고, 버튼 클릭 시 실행될 함수들을 명시합니다.##
@@ -104,9 +104,16 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.show_web.connect("clicked", self.show_web_func)
 		box.attach_next_to(self.show_web,self.hide_web,Gtk.PositionType.RIGHT,1,1)
 		self.webview.open("https://www.google.com/")
+		self.langmode=Gtk.Button.new_with_label("Programming Mode")
+		box.attach_next_to(self.langmode,launch_gmemo,Gtk.PositionType.BOTTOM,1,1)
+		self.langmode.connect("clicked",self.langmod)
+		self.langentry=Gtk.Entry()
+		self.langentry.set_text('Insert Programming Language')
+		box.attach_next_to(self.langentry,self.langmode,Gtk.PositionType.BOTTOM,1,1)
 		self.file()
 		self.show_all()
 		self.show_web.hide()
+		self.count=0
 		##버튼이 사용하게 될 함수들을 정의합니다.##
 	def webpage(self,widget):
 		urlget=str(self.memo.get_text())
@@ -215,6 +222,8 @@ class AppWindow(Gtk.ApplicationWindow):
 		elif response == Gtk.ResponseType.CANCEL:
 			dialog.destroy()
 		dialog.destroy()
+		lang=GtkSource.LanguageManager()
+		self.Text1.set_language(lang.get_language('python3'))
 	def combiner(self, widget):
 		end1 = self.Text1.get_end_iter()
 		dialog = Gtk.FileChooserDialog("Combine...", self,  Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
@@ -311,6 +320,17 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.webview.show()
 		self.hide_web.show()
 		self.show_web.hide()
+	def langmod(self,widget):
+		self.count+=1
+		if (int(self.count%2))!=0:
+			language_val=self.langentry.get_text()
+			lang=GtkSource.LanguageManager()
+			self.Text1.set_language(lang.get_language(language_val))
+			self.Text1v.set_auto_indent(True)
+		else:
+			lang=GtkSource.LanguageManager()
+			self.Text1.set_language(lang.get_language('text'))
+			self.Text1v.set_auto_indent(False)
 class Application(Gtk.Application):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, application_id="org.dedit.japanese",**kwargs)

@@ -5,9 +5,11 @@ from subprocess import Popen
 import sys
 gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit', '3.0')
-gi.require_version('GtkSource', '3.0')
+gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource, WebKit
 from urllib.request import urlopen
+import guesslang
+from guesslang import Guess
 ##창을 생성하고, 버튼 클릭 시 실행될 함수들을 명시합니다.##
 print("           Keisung/Bit_Time   ")
 print("DeltaEdit____________________0000 0000 0000 0111")
@@ -37,7 +39,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		gnu="This file is part of DeltaEdit.\nDeltaEdit is free software:\nyou can redistribute it and/\nor modify it\nunder the terms of the\nGNU General Public License\nas published by the Free Software Foundation,\neither version 3 of the License,\nor(at your option) any later version.\nDeltaEdit is distributed in the hope \nthat it will be useful,\nbut WITHOUT ANY WARRANTY;\nwithout even the implied warranty of MERCHANTABILITY\nor FITNESS FOR A PARTICULAR PURPOSE.\nSee the GNU General Public License\nfor more details.\nYou should have received\na copy of the GNU General Public License\nalong with DeltaEdit.\nIf not, see <https://www.gnu.org/licenses/"
 		insertstart=self.Text1.get_start_iter()
 		self.Text1.insert(insertstart, gnu)
-		self.Text1v = GtkSource.View(height_request=1, width_request=1, buffer = self.Text1)
+		self.Text1v = GtkSource.View.new_with_buffer(self.Text1)
 		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 1, 1)
 		button = Gtk.Button.new_with_label("Save")
 		button.connect("clicked", self.Save)
@@ -104,10 +106,19 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.show_web.connect("clicked", self.show_web_func)
 		box.attach_next_to(self.show_web,self.hide_web,Gtk.PositionType.RIGHT,1,1)
 		self.webview.open("https://www.google.com/")
-		self.file()
+		self.langmode=Gtk.Button.new_with_label("Programming Mode")
+		box.attach_next_to(self.langmode,launch_gmemo,Gtk.PositionType.BOTTOM,1,1)
+		self.langmode.connect("clicked",self.langmod)
+		self.langentry=Gtk.Entry()
+		self.langentry.set_text('Insert Programming Language')
+		box.attach_next_to(self.langentry,self.langmode,Gtk.PositionType.BOTTOM,1,1)
 		self.show_all()
 		self.show_web.hide()
-		##버튼이 사용하게 될 함수들을 정의합니다.##
+		self.Text1v.set_highlight_current_line(True)
+		start=self.Text1.get_start_iter()
+		end=self.Text1.get_end_iter()
+		text=self.Text1.get_text(start,end,True)
+		self.count=0
 	def webpage(self,widget):
 		urlget=str(self.memo.get_text())
 		wc=urlget[0:4]
@@ -206,7 +217,7 @@ class AppWindow(Gtk.ApplicationWindow):
 					dialog.destroy()
 				except:
 					with open(w, 'r', encoding=encoding_defined) as f:
-						data=f.read()
+						data=f.read()				
 						self.Text.set_text(w)
 						self.Text1.insert(start2,data)
 					dialog.destroy()
@@ -311,6 +322,17 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.webview.show()
 		self.hide_web.show()
 		self.show_web.hide()
+	def langmod(self,widget):
+		self.count+=1
+		if (int(self.count%2))!=0:
+			language_val=self.langentry.get_text()
+			lang=GtkSource.LanguageManager()
+			self.Text1.set_language(lang.get_language(language_val))
+			self.Text1v.set_auto_indent(True)
+		else:
+			lang=GtkSource.LanguageManager()
+			self.Text1.set_language(lang.get_language('text'))
+			self.Text1v.set_auto_indent(False)
 class Application(Gtk.Application):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, application_id="org.dedit.korean",**kwargs)
@@ -318,5 +340,6 @@ class Application(Gtk.Application):
         Gtk.Application.do_startup(self)
     def do_activate(self):
         self.window=AppWindow(application=self,title="DeltaEdit-'Korean'") 
+
 app=Application()
 app.run(sys.argv)
