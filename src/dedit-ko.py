@@ -64,7 +64,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		command = Gtk.Button.new_with_label("EXECUTE!")
 		command.connect("clicked", self.Execute)
 		box.attach_next_to(command, self.memo, Gtk.PositionType.BOTTOM, 1, 1)
-		label_slot=Gtk.Label("Specify Encoding if you don't like to open or save it in utf-8 or cp949")
+		label_slot=Gtk.Label.new_with_mnemonic("Specify Encoding if you don't like to open or save it in utf-8 or cp949")
 		box.attach_next_to(label_slot, command, Gtk.PositionType.BOTTOM, 1, 1)
 		self.paper_encoding=Gtk.Entry()
 		self.paper_encoding.set_text("cp949")
