@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 import gi
 import subprocess
-from subprocess import Popen
+from subprocess import Popen,call
 import sys
 gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit', '3.0')
 gi.require_version('GtkSource', '4')
-from gi.repository import Gtk, GtkSource, WebKit
+from gi.repository import Gtk, GtkSource, WebKit, Gio
 from urllib.request import urlopen
 ##창을 생성하고, 버튼 클릭 시 실행될 함수들을 명시합니다.##
 print("           Keisung/Bit_Time   ")
@@ -110,7 +110,6 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.langentry=Gtk.Entry()
 		self.langentry.set_text('Insert Programming Language')
 		box.attach_next_to(self.langentry,self.langmode,Gtk.PositionType.BOTTOM,1,1)
-		self.file()
 		self.show_all()
 		self.show_web.hide()
 		self.count=0
@@ -290,28 +289,6 @@ class AppWindow(Gtk.ApplicationWindow):
 		doc_start=self.help_buffer.get_start_iter()
 		doc_end=self.help_buffer.get_end_iter()
 		self.help_buffer.delete(doc_start, doc_end)
-	def file(self):
-		args=sys.argv[1:]
-		for w in args:
-			start2 = self.Text1.get_start_iter()
-			end2 = self.Text1.get_end_iter()
-			self.Text.set_text("")
-			self.Text1.delete(start2, end2) 
-			try:
-				try:
-					with open(w, 'r', encoding='utf-8') as f:
-							data = f.read()
-							self.Text.set_text(w)
-							self.Text1.insert(start2, data)
-							print("Keisung")
-				except:
-					with open(w, 'r', encoding='gb2312') as f:
-						data=f.read()
-						self.Text.set_text(w)
-						self.Text1.insert(start2,data)
-						print("Keisung")
-			except:
-				print("Keisung")
 	def hide_web_func(self,widget):
 		self.webview.hide()
 		self.hide_web.hide()
@@ -340,5 +317,3 @@ class Application(Gtk.Application):
         self.window=AppWindow(application=self,title="DeltaEdit-'Chinese'") 
 app=Application()
 app.run(sys.argv)
-
-

@@ -292,28 +292,6 @@ class AppWindow(Gtk.ApplicationWindow):
 		doc_start=self.help_buffer.get_start_iter()
 		doc_end=self.help_buffer.get_end_iter()
 		self.help_buffer.delete(doc_start, doc_end)
-	def file(self):
-		args=sys.argv[1:]
-		for w in args:
-			start2 = self.Text1.get_start_iter()
-			end2 = self.Text1.get_end_iter()
-			self.Text.set_text("")
-			self.Text1.delete(start2, end2) 
-			try:
-				try:
-					with open(w, 'r', encoding='utf-8') as f:
-							data = f.read()
-							self.Text.set_text(w)
-							self.Text1.insert(start2, data)
-							print("Keisung")
-				except:
-					with open(w, 'r', encoding='cp949') as f:
-						data=f.read()
-						self.Text.set_text(w)
-						self.Text1.insert(start2,data)
-						print("Keisung")
-			except:
-				print("Keisung")
 	def hide_web_func(self,widget):
 		self.webview.hide()
 		self.hide_web.hide()
