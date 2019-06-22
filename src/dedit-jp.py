@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import gi
-import subprocess
 from subprocess import Popen
 import sys
 gi.require_version('Gtk', '3.0')
@@ -8,7 +7,6 @@ gi.require_version('WebKit', '3.0')
 gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource, WebKit
 from urllib.request import urlopen
-##창을 생성하고, 버튼 클릭 시 실행될 함수들을 명시합니다.##
 print("           Keisung/Bit_Time   ")
 print("DeltaEdit____________________0000 0000 0000 0111")
 print("_______________Welcome__________________________")
