@@ -6,7 +6,6 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit', '3.0')
 gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource, WebKit
-from urllib.request import urlopen
 print("           Keisung/Bit_Time   ")
 print("DeltaEdit____________________0000 0000 0000 0111")
 print("_______________Welcome__________________________")
