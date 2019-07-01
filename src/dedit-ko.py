@@ -4,9 +4,10 @@ import subprocess
 from subprocess import Popen
 import sys
 gi.require_version('Gtk', '3.0')
-gi.require_version('WebKit', '3.0')
+gi.require_version('WebKit2', '4.0')
 gi.require_version('GtkSource', '4')
-from gi.repository import Gtk, GtkSource, WebKit
+from gi.repository import Gtk, GtkSource
+from gi.repository import WebKit2 as WebKit
 print("           Keisung/Bit_Time   ")
 print("DeltaEdit____________________0000 0000 0000 0111")
 print("_______________Welcome__________________________")
@@ -101,7 +102,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.show_web=Gtk.Button.new_with_label("Show Web Browser")
 		self.show_web.connect("clicked", self.show_web_func)
 		box.attach_next_to(self.show_web,self.hide_web,Gtk.PositionType.RIGHT,1,1)
-		self.webview.open("https://www.google.com/")
+		self.webview.load_uri("https://www.google.com/")
 		self.langmode=Gtk.Button.new_with_label("Programming Mode")
 		box.attach_next_to(self.langmode,launch_gmemo,Gtk.PositionType.BOTTOM,1,1)
 		self.langmode.connect("clicked",self.langmod)
@@ -123,33 +124,33 @@ class AppWindow(Gtk.ApplicationWindow):
 		if checkhead=='https://':
 			chkdt=urlget[8:12]
 			if chkdt=='www.':
-				self.webview.open(urlget)
+				self.webview.load_uri(urlget)
 			else:
 				urlget_last=urlget[8:]
 				newurl_adj="https://www.%s" % urlget_last
-				self.webview.open(newurl_adj)
+				self.webview.load_uri(newurl_adj)
 		elif checkhead2=='http://':
 			chkdt__=urlget[7:11]
 			if chkdt__=='www.':
-				self.webview.open(urlget)
+				self.webview.load_uri(urlget)
 			else:
 				urllast=urlget[7:]
 				newurl_adj2="http://www.%s" % urllast
-				self.webview.open(newurl_adj2)
+				self.webview.load_uri(newurl_adj2)
 		elif wc == 'www.':
 			try:
 				urlll="https://%s" % urlget
-				self.webview.open(urlll)
+				self.webview.load_uri(urlll)
 			except:
 				urllle="http://%s" % urlget
-				self.webview.open(urllle)
+				self.webview.load_uri(urllle)
 		else:
 			urllll="https://www.%s" % urlget
 			urlllll="http://www.%s" % urlget
 			try:
-				self.webview.open(urllll)
+				self.webview.load_uri(urllll)
 			except:
-				self.webview.open(urlllll)
+				self.webview.load_uri(urlllll)
 	def forward(self,widget):
 		try:
 			self.webview.go_forward()
