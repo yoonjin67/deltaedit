@@ -6,7 +6,7 @@
 ### How do I get set up? ###
 *Dependency
 pygobject(python3-gi)
-webkitgtk(gir1.2-webkit-3.0)
+webkitgtk(gir1.2-webkit2-4.0)
 python3-pip
 * Setup
 Linux:Run Installer.py to install, run Uninstaller.py to uninstall.
