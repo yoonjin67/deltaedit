@@ -53,7 +53,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		cleanbtn = Gtk.Button.new_with_label("*CLEAN ALL LINES*You can't recover deleted lines!")
 		cleanbtn.connect("clicked", self.CLEAN)
 		box.attach_next_to(cleanbtn, self.Text1v, Gtk.PositionType.BOTTOM, 1, 1)
-		lbl = Gtk.Label("command to Execute/or type URL")
+		lbl = Gtk.Label.new_with_mnemonic("command to Execute/or type URL")
 		box.attach_next_to(lbl, cleanbtn, Gtk.PositionType.BOTTOM, 1, 1)
 		self.memo = Gtk.Entry()
 		self.memo.set_text("put your command!/or Type URL and Press ENTER To go to URL")
