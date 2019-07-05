@@ -102,6 +102,8 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.show_web=Gtk.Button.new_with_label("Show Web Browser")
 		self.show_web.connect("clicked", self.show_web_func)
 		box.attach_next_to(self.show_web,self.hide_web,Gtk.PositionType.RIGHT,1,1)
+		self.blanklabel=Gtk.Label.new_with_mnemonic("                                                                                                                                                                                                                                                                                                            ")
+		box.attach_next_to(self.blanklabel,self.show_web,Gtk.PositionType.RIGHT,1,1)
 		self.webview.load_uri("https://www.google.com/")
 		self.langmode=Gtk.Button.new_with_label("Programming Mode")
 		box.attach_next_to(self.langmode,launch_gmemo,Gtk.PositionType.BOTTOM,1,1)
