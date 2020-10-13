@@ -4,7 +4,7 @@ from subprocess import Popen
 import sys
 gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit2', '4.0')
-gi.require_version('GtkSource', '3.0')
+gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource
 from gi.repository import WebKit2 as WebKit
 print("           Keisung/Bit_Time   ")

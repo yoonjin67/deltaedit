@@ -8,6 +8,7 @@
 pygobject(python3-gi)
 webkitgtk(gir1.2-webkit2-4.0)
 python3-pip
+gir1.2-gtksource-4
 * Setup
 Linux:Run Installer.py to install, run Uninstaller.py to uninstall.
 * How to run
