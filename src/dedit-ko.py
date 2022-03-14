@@ -8,7 +8,6 @@ gi.require_version('WebKit2', '4.0')
 gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource
 from gi.repository import WebKit2 as WebKit
-print("           Keisung/Bit_Time   ")
 print("DeltaEdit____________________0000 0000 0000 0111")
 print("_______________Welcome__________________________")
 class AppWindow(Gtk.ApplicationWindow):
@@ -250,10 +249,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		dialog.destroy()
 	def Egg(self, widget):
 		print("*************")
-		print("   KEISUNG   ")
-		print("    KSDEV    ")
 		print("@#@#@#@#@#@#@")
-		print("BIT/TIME*2018")
 		print("&&&&&&&&&&&&&")
 		print("$   $   $   $")
 		print("** *** *** **")
@@ -310,10 +306,10 @@ class AppWindow(Gtk.ApplicationWindow):
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language(language_val))
 			self.Text1v.set_auto_indent(True)
+			self.Text1v.insert_on_tab(True)
 		else:
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language('text'))
-			self.Text1v.set_auto_indent(False)
 class Application(Gtk.Application):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, application_id="org.dedit.korean",**kwargs)

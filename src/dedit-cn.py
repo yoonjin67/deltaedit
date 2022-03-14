@@ -7,7 +7,6 @@ gi.require_version('WebKit2', '4.0')
 gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource
 from gi.repository import WebKit2 as WebKit
-print("           Keisung/Bit_Time   ")
 print("DeltaEdit____________________0000 0000 0000 0111")
 print("_______________Welcome__________________________")
 class AppWindow(Gtk.ApplicationWindow):
@@ -36,6 +35,8 @@ class AppWindow(Gtk.ApplicationWindow):
 		insertstart=self.Text1.get_start_iter()
 		self.Text1.insert(insertstart, gnu)
 		self.Text1v = GtkSource.View(height_request=1, width_request=1, buffer = self.Text1)
+		self.Text1v.auto_indent(True)
+		self.Text1v.insert_on_tab(True)
 		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 1, 1)
 		button = Gtk.Button.new_with_label("Save")
 		button.connect("clicked", self.Save)
@@ -153,7 +154,6 @@ class AppWindow(Gtk.ApplicationWindow):
 		try:
 			self.webview.go_forward()
 		except:
-			print("BIT_TIME_KS/DEV")
 	def back(self,widget):
 		try:
 			self.webview.go_back()
@@ -248,10 +248,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		dialog.destroy()
 	def Egg(self, widget):
 		print("*************")
-		print("   KEISUNG   ")
-		print("    KSDEV    ")
 		print("@#@#@#@#@#@#@")
-		print("BIT/TIME*2018")
 		print("&&&&&&&&&&&&&")
 		print("$   $   $   $")
 		print("** *** *** **")
@@ -272,7 +269,6 @@ class AppWindow(Gtk.ApplicationWindow):
 		except:
 			print("ERROR")
 	def Quit(self, widget):
-		print("           Keisung/Bit_Time   ")
 		print("DeltaEdit____________________1111 1111 1111 1001")
 		print("________________________Turn_Off________________")
 		exit()
@@ -307,11 +303,9 @@ class AppWindow(Gtk.ApplicationWindow):
 			language_val=self.langentry.get_text()
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language(language_val))
-			self.Text1v.set_auto_indent(True)
 		else:
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language('text'))
-			self.Text1v.set_auto_indent(False)
 class Application(Gtk.Application):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, application_id="org.dedit.chinese",**kwargs)
