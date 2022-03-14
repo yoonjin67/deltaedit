@@ -8,7 +8,7 @@ gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource
 from gi.repository import WebKit2 as WebKit
 print("DeltaEdit____________________0000 0000 0000 0111")
-print("_______________Welcome__________________________")
+print("_______________Welcome__________________________:TAIWAN #1")
 class AppWindow(Gtk.ApplicationWindow):
 	def __init__(self,*args,**kwargs):
 		super().__init__(*args,**kwargs)
@@ -35,7 +35,8 @@ class AppWindow(Gtk.ApplicationWindow):
 		insertstart=self.Text1.get_start_iter()
 		self.Text1.insert(insertstart, gnu)
 		self.Text1v = GtkSource.View(height_request=1, width_request=1, buffer = self.Text1)
-		self.Text1v.auto_indent(True)
+		self.Text1v.set_tab_width(2)
+		self.Text1v.set_auto_indent(True)
 		self.Text1v.insert_on_tab(True)
 		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 1, 1)
 		button = Gtk.Button.new_with_label("Save")
@@ -152,13 +153,14 @@ class AppWindow(Gtk.ApplicationWindow):
 				self.webview.load_uri(urlllll)
 	def forward(self,widget):
 		try:
-			self.webview.go_forward()
+				self.webview.go_forward()	
 		except:
+				print("error::can't go forward! FREE TIBET")
 	def back(self,widget):
 		try:
 			self.webview.go_back()
 		except:
-			print("@@@~@@@~@@@~BIT_TIME~@@@~@@@~@@@")
+			print("error::Can't go back! FREE TIBET")
 	def gmemo(self, widget):
 		try:
 			Popen('gmemo')
@@ -307,11 +309,11 @@ class AppWindow(Gtk.ApplicationWindow):
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language('text'))
 class Application(Gtk.Application):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, application_id="org.dedit.chinese",**kwargs)
-    def do_startup(self):
-        Gtk.Application.do_startup(self)
-    def do_activate(self):
-        self.window=AppWindow(application=self,title="DeltaEdit-'Chinese'") 
+		def __init__(self, *args, **kwargs):
+			super().__init__(*args, application_id="org.dedit.chinese",**kwargs)
+		def do_startup(self):
+			Gtk.Application.do_startup(self)
+		def do_activate(self):
+			self.window=AppWindow(application=self,title="DeltaEdit-'Chinese'") 
 app=Application()
 app.run(sys.argv)
