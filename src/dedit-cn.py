@@ -37,7 +37,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.Text1v = GtkSource.View(height_request=1, width_request=1, buffer = self.Text1)
 		self.Text1v.set_tab_width(2)
 		self.Text1v.set_auto_indent(True)
-		self.Text1v.set_insert_on_tab(True)
+		self.Text1v.set_indent_on_tab(True)
 		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 1, 1)
 		button = Gtk.Button.new_with_label("Save")
 		button.connect("clicked", self.Save)

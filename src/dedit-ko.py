@@ -307,7 +307,7 @@ class AppWindow(Gtk.ApplicationWindow):
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language(language_val))
 			self.Text1v.set_auto_indent(True)
-			self.Text1v.set_insert_on_tab(True)
+			self.Text1v.set_indent_on_tab(True)
 		else:
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language('text'))
