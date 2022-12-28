@@ -4,7 +4,7 @@
 
 * DeltaEdit is Text Editor for Unix-like OS.
 ### How do I get set up? ###
-*Dependency
+* Dependency
 python3-gi
 gir1.2-webkit2-4.0
 python3-pip
