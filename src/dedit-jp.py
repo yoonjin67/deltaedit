@@ -2,17 +2,19 @@
 import gi
 from subprocess import Popen
 import sys
+import os
 gi.require_version('Gtk', '3.0')
+gi.require_version('Vte', '2.91')
 gi.require_version('WebKit2', '4.0')
 gi.require_version('GtkSource', '4')
-from gi.repository import Gtk, GtkSource
+from gi.repository import Gtk, GtkSource, Vte, GLib
 from gi.repository import  WebKit2 as WebKit
 print("DeltaEdit____________________0000 0000 0000 0111")
 print("_______________Welcome__________________________")
 class AppWindow(Gtk.ApplicationWindow):
 	def __init__(self,*args,**kwargs):
 		super().__init__(*args,**kwargs)
-		self.set_default_size(500,800)
+		self.set_default_size(900,900)
 		titleforwin=Gtk.HeaderBar()
 		titleforwin.props.title="DeltaEdit-'Japanese'"
 		titleforwin.set_show_close_button(False)
@@ -38,7 +40,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.Text1v.set_tab_width(2)
 		self.Text1v.set_auto_indent(True)
 		self.Text1v.set_indent_on_tab(True)
-		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 1, 1)
+		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 30,30)
 		button = Gtk.Button.new_with_label("Save")
 		button.connect("clicked", self.Save)
 		container.pack_start(button, True, True, 0)
@@ -62,7 +64,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		command = Gtk.Button.new_with_label("EXECUTE!")
 		command.connect("clicked", self.Execute)
 		box.attach_next_to(command, self.memo, Gtk.PositionType.BOTTOM, 1, 1)
-		label_slot=Gtk.Label.new_with_mnemonic("Specify Encoding if you don't like to open it in utf-8 or shift_jis  \n    **If you can't open Japanese text file, try eucjp")
+		label_slot=Gtk.Label.new_with_mnemonic("Specify Encoding if you don't like to open it in utf-8 or shift_jis  \n	**If you can't open Japanese text file, try eucjp")
 		box.attach_next_to(label_slot, command, Gtk.PositionType.BOTTOM, 1, 1)
 		self.paper_encoding=Gtk.Entry()
 		self.paper_encoding.set_text("shift_jis")
@@ -90,12 +92,25 @@ class AppWindow(Gtk.ApplicationWindow):
 		container.pack_start(combine, True, True, 0)
 		self.memo.connect("activate", self.webpage)
 		self.webview=WebKit.WebView()
-		box.attach_next_to(self.webview, self.Text1v, Gtk.PositionType.RIGHT, 1000,1000)
+		box.attach_next_to(self.webview, self.Text1v, Gtk.PositionType.RIGHT, 70,70)
+		
 		self.btnforward=Gtk.Button.new_with_label(">")
 		self.btnback=Gtk.Button.new_with_label("<")
 		self.btnforward.connect("clicked", self.forward)
 		self.btnback.connect("clicked", self.back)
 		box.attach_next_to(self.btnback,self.webview, Gtk.PositionType.TOP, 1,1)
+		self.terminal	 = Vte.Terminal()
+		self.terminal.spawn_sync(
+		Vte.PtyFlags.DEFAULT,
+		os.environ['HOME'],
+		["/bin/bash"],
+		[],
+		GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+		None,
+		None,
+		)
+		box.attach_next_to(self.terminal,self.webview,Gtk.PositionType.BOTTOM,100,100)
+		self.count=0
 		box.attach_next_to(self.btnforward,self.btnback,Gtk.PositionType.RIGHT,1,1)
 		self.hide_web=Gtk.Button.new_with_label("Hide Web Browser")
 		self.hide_web.connect("clicked", self.hide_web_func)
@@ -103,8 +118,9 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.show_web=Gtk.Button.new_with_label("Show Web Browser")
 		self.show_web.connect("clicked", self.show_web_func)
 		box.attach_next_to(self.show_web,self.hide_web,Gtk.PositionType.RIGHT,1,1)
-		self.blanklabel=Gtk.Label.new_with_mnemonic("                                                                                                                                                                                                                                                                                                            ")
+		self.blanklabel=Gtk.Label.new_with_mnemonic("																																																																											")
 		box.attach_next_to(self.blanklabel,self.show_web,Gtk.PositionType.RIGHT,1,1)
+
 		self.webview.load_uri("https://www.google.com/")
 		self.langmode=Gtk.Button.new_with_label("Programming Mode")
 		box.attach_next_to(self.langmode,launch_gmemo,Gtk.PositionType.BOTTOM,1,1)
@@ -114,7 +130,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		box.attach_next_to(self.langentry,self.langmode,Gtk.PositionType.BOTTOM,1,1)
 		self.show_all()
 		self.show_web.hide()
-		self.count=0
+		
 		##버튼이 사용하게 될 함수들을 정의합니다.##
 	def webpage(self,widget):
 		urlget=str(self.memo.get_text())
@@ -155,6 +171,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		try:
 			self.webview.go_forward()
 		except:
+			print("@@@~@@@~@@@~BIT_TIME~@@@~@@@~@@@")
 	def back(self,widget):
 		try:
 			self.webview.go_back()
@@ -270,7 +287,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		except:
 			print("ERROR")
 	def Quit(self, widget):
-		print("           Keisung/Bit_Time   ")
+		print("		   Keisung/Bit_Time   ")
 		print("DeltaEdit____________________1111 1111 1111 1001")
 		print("________________________Turn_Off________________")
 		exit()
@@ -309,11 +326,11 @@ class AppWindow(Gtk.ApplicationWindow):
 			lang=GtkSource.LanguageManager()
 			self.Text1.set_language(lang.get_language('text'))
 class Application(Gtk.Application):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, application_id="org.dedit.japanese",**kwargs)
-    def do_startup(self):
-        Gtk.Application.do_startup(self)
-    def do_activate(self):
-        self.window=AppWindow(application=self,title="DeltaEdit-'Japanese'") 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, application_id="org.dedit.japanese",**kwargs)
+	def do_startup(self):
+		Gtk.Application.do_startup(self)
+	def do_activate(self):
+		self.window=AppWindow(application=self,title="DeltaEdit-'Japanese'") 
 app=Application()
 app.run(sys.argv)

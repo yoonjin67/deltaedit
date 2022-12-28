@@ -12,11 +12,11 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.add(memo)
 		self.show_all()
 class Application(Gtk.Application):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, application_id="org.dedit.memo",**kwargs)
-    def do_startup(self):
-        Gtk.Application.do_startup(self)
-    def do_activate(self):
-        self.window=AppWindow(application=self,title="Gmemo") 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, application_id="org.dedit.memo",**kwargs)
+	def do_startup(self):
+		Gtk.Application.do_startup(self)
+	def do_activate(self):
+		self.window=AppWindow(application=self,title="Gmemo") 
 app=Application()
 app.run(sys.argv)

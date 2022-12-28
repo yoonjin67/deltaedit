@@ -2,17 +2,19 @@
 import gi
 from subprocess import Popen
 import sys
+import os
 gi.require_version('Gtk', '3.0')
+gi.require_version('Vte', '2.91')
 gi.require_version('WebKit2', '4.0')
 gi.require_version('GtkSource', '4')
-from gi.repository import Gtk, GtkSource
+from gi.repository import Gtk, GtkSource, Vte, GLib
 from gi.repository import WebKit2 as WebKit
 print("DeltaEdit____________________0000 0000 0000 0111")
 print("_______________Welcome__________________________:TAIWAN #1")
 class AppWindow(Gtk.ApplicationWindow):
 	def __init__(self,*args,**kwargs):
 		super().__init__(*args,**kwargs)
-		self.set_default_size(500,800)
+		self.set_default_size(900,900)
 		titleforwin=Gtk.HeaderBar()
 		titleforwin.props.title="DeltaEdit-'Chinese'"
 		titleforwin.set_show_close_button(False)
@@ -38,7 +40,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		self.Text1v.set_tab_width(2)
 		self.Text1v.set_auto_indent(True)
 		self.Text1v.set_indent_on_tab(True)
-		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 1, 1)
+		box.attach_next_to(self.Text1v, self.Text, Gtk.PositionType.BOTTOM, 30, 30)
 		button = Gtk.Button.new_with_label("Save")
 		button.connect("clicked", self.Save)
 		container.pack_start(button, True, True, 0)
@@ -62,7 +64,7 @@ class AppWindow(Gtk.ApplicationWindow):
 		command = Gtk.Button.new_with_label("EXECUTE!")
 		command.connect("clicked", self.Execute)
 		box.attach_next_to(command, self.memo, Gtk.PositionType.BOTTOM, 1, 1)
-		label_slot=Gtk.Label.new_with_mnemonic("Specify Encoding if you don't like to open it in utf-8 or gb2312  \n    **If you can't open Taiwanese text file, try big5")
+		label_slot=Gtk.Label.new_with_mnemonic("Specify Encoding if you don't like to open it in utf-8 or gb2312  \n	**If you can't open Taiwanese text file, try big5")
 		box.attach_next_to(label_slot, command, Gtk.PositionType.BOTTOM, 1, 1)
 		self.paper_encoding=Gtk.Entry()
 		self.paper_encoding.set_text("gb2312")
@@ -90,21 +92,34 @@ class AppWindow(Gtk.ApplicationWindow):
 		container.pack_start(combine, True, True, 0)
 		self.memo.connect("activate", self.webpage)
 		self.webview=WebKit.WebView()
-		box.attach_next_to(self.webview, self.Text1v, Gtk.PositionType.RIGHT, 1000,1000)
+		box.attach_next_to(self.webview, self.Text1v, Gtk.PositionType.RIGHT, 70,70)
 		self.btnforward=Gtk.Button.new_with_label(">")
 		self.btnback=Gtk.Button.new_with_label("<")
 		self.btnforward.connect("clicked", self.forward)
 		self.btnback.connect("clicked", self.back)
 		box.attach_next_to(self.btnback,self.webview, Gtk.PositionType.TOP, 1,1)
 		box.attach_next_to(self.btnforward,self.btnback,Gtk.PositionType.RIGHT,1,1)
+		
 		self.hide_web=Gtk.Button.new_with_label("Hide Web Browser")
 		self.hide_web.connect("clicked", self.hide_web_func)
 		box.attach_next_to(self.hide_web,self.btnforward,Gtk.PositionType.RIGHT,1,1)
 		self.show_web=Gtk.Button.new_with_label("Show Web Browser")
 		self.show_web.connect("clicked", self.show_web_func)
 		box.attach_next_to(self.show_web,self.hide_web,Gtk.PositionType.RIGHT,1,1)
-		self.blanklabel=Gtk.Label.new_with_mnemonic("                                                                                                                                                                                                                                                                                                            ")
+		self.blanklabel=Gtk.Label.new_with_mnemonic("																																																																											")
 		box.attach_next_to(self.blanklabel,self.show_web,Gtk.PositionType.RIGHT,1,1)
+		self.terminal	 = Vte.Terminal()
+		self.terminal.spawn_sync(
+		Vte.PtyFlags.DEFAULT,
+		os.environ['HOME'],
+		["/bin/bash"],
+		[],
+		GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+		None,
+		None,
+		)
+		box.attach_next_to(self.terminal,self.webview,Gtk.PositionType.BOTTOM,100,100)
+
 		self.webview.load_uri("https://www.google.com/")
 		self.langmode=Gtk.Button.new_with_label("Programming Mode-Insert Language Name")
 		box.attach_next_to(self.langmode,launch_gmemo,Gtk.PositionType.BOTTOM,1,1)
