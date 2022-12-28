@@ -4,13 +4,14 @@
 
 * DeltaEdit is Text Editor for Unix-like OS.
 ### How do I get set up? ###
-* Dependency
-python3-gi
-gir1.2-webkit2-4.0
-python3-pip
-gir1.2-gtksource-4
-gir1.2-glib-2.0
-gir1.2-vte-2.91
+* Dependency:
+
+python3-gi,
+gir1.2-webkit2-4.0,
+python3-pip,
+gir1.2-gtksource-4,
+gir1.2-glib-2.0,
+gir1.2-vte-2.91,
 * Setup
 Linux:Run Installer.py to install, run Uninstaller.py to uninstall.
 * How to run
