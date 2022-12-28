@@ -23,7 +23,6 @@ Linux:Run Installer.py to install, run Uninstaller.py to uninstall.
 I need your help!
 
 ### Who do I talk to? ###
-* yoonjin671@protonmail.ch
-Age:18/Has little time to fix bugs. Doing my best!
+* yoonjin67@gmail.com
 ### Windows Support ###
 There is no latest Python3 Gtk+ 3 support for Windows.
