@@ -15,9 +15,7 @@ gir1.2-vte-2.91
 Linux:Run Installer.py to install, run Uninstaller.py to uninstall.
 * How to run
 	dedit(Text Editor):
-			Korean:type dedit-ko
-			Chinese:type dedit-cn
-			Japanese:type dedit-jp
+			 dedit
 	gmemo(Memo App):gmemo
 ### Contribution guidelines ###
 I need your help!
