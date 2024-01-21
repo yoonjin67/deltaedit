@@ -125,7 +125,7 @@ class AppWindow(Gtk.ApplicationWindow):
         None,
         None,
         )
-        box.attach_next_to(self.terminal,self.webview,Gtk.PositionType.BOTTOM,200,200)
+        box.attach_next_to(self.terminal,self.TextScrollWindow,Gtk.PositionType.RIGHT,200,200)
 
         self.webview.load_uri("https://www.google.com/")
         self.show_all()
@@ -303,11 +303,13 @@ class AppWindow(Gtk.ApplicationWindow):
         self.help_buffer.delete(doc_start, doc_end)
     def hide_web_func(self,widget):
         self.webview.hide()
+        self.terminal.show()
         self.hide_web.hide()
         self.btnback.hide()
         self.btnforward.hide()
         self.show_web.show()
     def show_web_func(self,widget):
+        self.terminal.hide()
         self.webview.show()
         self.hide_web.show()
         self.btnback.show()
