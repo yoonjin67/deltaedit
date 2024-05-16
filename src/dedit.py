@@ -17,7 +17,7 @@ class AppWindow(Gtk.ApplicationWindow):
         self.set_default_size(900,900)
         self.currentfilename = 'COPYING'
         titleforwin=Gtk.HeaderBar()
-        titleforwin.props.title="DeltaEdit-'Chinese'"
+        titleforwin.props.title="DeltaEdit-"
         titleforwin.set_show_close_button(False)
         self.set_titlebar(titleforwin)
         container=Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=1)
