@@ -5,7 +5,7 @@ import sys
 import os
 gi.require_version('Gtk', '3.0')
 gi.require_version('Vte', '2.91')
-gi.require_version('WebKit2', '4.0')
+#gi.require_version('WebKit2', '4.0')
 gi.require_version('GtkSource', '4')
 from gi.repository import Gtk, GtkSource, Vte, GLib
 from gi.repository import WebKit2 as WebKit
