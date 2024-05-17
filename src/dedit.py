@@ -279,9 +279,9 @@ class AppWindow(Gtk.ApplicationWindow):
     def newwin(self, widget):
         try:
             try:
-                Popen("dedit", shell=False)
+                Popen("/usr/bin/gmemo", shell=True)
             except:
-                Popen("/usr/bin/dedit", shell=False)
+                Popen("/usr/bin/gmemo", shell=True)
         except:
             print("ERROR")
     def Quit(self, widget):
