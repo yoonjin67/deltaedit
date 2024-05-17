@@ -50,7 +50,7 @@ class AppWindow(Gtk.ApplicationWindow):
         button2 = Gtk.Button.new_with_label("Open")
         button2.connect("clicked", self.Open)
         container.pack_start(button2, True, True, 0)
-        info = Gtk.Button()
+        info = Gtk.Button().new_with_label("DeltaEdit")
         imageattach=Gtk.Image()
         imageattach.set_from_file('/usr/share/pixmaps/dedit_logo.png')
         info.connect("clicked", self.Egg)
